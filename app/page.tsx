@@ -58,27 +58,27 @@ const metrics = [
 
 export default function Home() {
   const primaryButtonClass =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-slate-800 px-5 text-base font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-slate-700";
+    "inline-flex h-12 w-full max-w-[26rem] items-center justify-center gap-2.5 rounded-xl bg-slate-900 px-6 text-base font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-slate-800";
   const blueButtonClass =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-sky-700 px-5 text-base font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-sky-600";
+    "inline-flex h-12 w-full max-w-[26rem] items-center justify-center gap-2.5 rounded-xl bg-sky-800 px-6 text-base font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-sky-700";
   const greenButtonClass =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-5 text-base font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-emerald-600";
+    "inline-flex h-12 w-full max-w-[26rem] items-center justify-center gap-2.5 rounded-xl bg-emerald-800 px-6 text-base font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-emerald-700";
 
   return (
     <div
       id="top"
-      className="min-h-screen bg-[radial-gradient(circle_at_12%_0%,rgba(148,163,184,0.16),transparent_34%),radial-gradient(circle_at_88%_22%,rgba(56,189,248,0.10),transparent_35%),#f8fafc] text-slate-900"
+      className="min-h-screen bg-[radial-gradient(circle_at_12%_0%,rgba(148,163,184,0.2),transparent_34%),radial-gradient(circle_at_88%_22%,rgba(56,189,248,0.14),transparent_35%),#f1f5f9] text-slate-900"
     >
       <Navbar />
 
       <main>
-        <section className="mx-auto w-full max-w-7xl px-4 pb-12 pt-14 sm:px-6 sm:pb-14 md:pt-16 lg:px-8">
+        <section className="mx-auto w-full max-w-7xl px-4 pb-14 pt-16 sm:px-6 sm:pb-16 md:pt-20 lg:px-8">
           <div className="animate-fade-up text-center">
             <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-700">
               <BriefcaseBusiness size={14} />
               Growth Services
             </div>
-            <h1 className="mt-6 text-balance text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 text-balance text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
               Grow Your LinkedIn Presence
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
@@ -86,17 +86,17 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="animate-fade-up animate-delay-1 mx-auto mt-10 max-w-3xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+          <div className="animate-fade-up animate-delay-1 mx-auto mt-10 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-300/35 sm:p-8">
             <a
               href="#contact"
-              className={`${primaryButtonClass} mx-auto max-w-md sm:text-lg`}
+              className={`${primaryButtonClass} mx-auto sm:text-lg`}
             >
               <ArrowRight size={18} />
               Rent LinkedIn Account
             </a>
 
             <div className="mt-6 grid gap-3 text-left text-sm text-slate-700 sm:grid-cols-2">
-              <p className="rounded-lg bg-slate-50 px-3 py-2">Basically for Company</p>
+              <p className="rounded-lg bg-slate-50 px-3 py-2">Perfect for Companies</p>
               <p className="rounded-lg bg-slate-50 px-3 py-2">Grow your Business Network</p>
               <p className="rounded-lg bg-slate-50 px-3 py-2">Boost Lead Generation</p>
               <p className="rounded-lg bg-slate-50 px-3 py-2">Expand Client Outreach</p>
@@ -106,10 +106,10 @@ export default function Home() {
           </div>
 
           <div className="animate-fade-up animate-delay-2 mt-8 grid items-stretch gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-md shadow-slate-300/30">
               <a
                 href="#contact"
-                className={`${blueButtonClass} mx-auto md:max-w-sm`}
+                className={`${blueButtonClass} mx-auto`}
               >
                 <Users size={16} />
                 Get LinkedIn Connections Now
@@ -120,10 +120,10 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-md shadow-slate-300/30">
               <a
                 href="#contact"
-                className={`${greenButtonClass} mx-auto md:max-w-sm`}
+                className={`${greenButtonClass} mx-auto`}
               >
                 <TrendingUp size={16} />
                 Earn Money as a LinkedIn Provider
@@ -135,11 +135,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          <div className="animate-fade-up animate-delay-3 mt-8 grid gap-4 sm:grid-cols-3">
             {metrics.map((item) => {
               const Icon = item.icon;
               return (
-                <article key={item.label} className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-0.5">
+                <article key={item.label} className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md">
                   <span className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600">
                     <Icon size={18} />
                   </span>
@@ -151,62 +151,68 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="services" className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
-          <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <section id="services" className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+          <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-300/30 sm:p-8">
             <div className="text-center">
-              <h2 className="text-3xl font-semibold sm:text-4xl">LinkedIn Growth Services</h2>
+              <h2 className="text-3xl font-bold sm:text-4xl">LinkedIn Growth Services</h2>
               <p className="mx-auto mt-3 max-w-2xl text-slate-600">
                 Empower your professional growth with tailored services designed for measurable outcomes.
               </p>
             </div>
 
             <div className="mt-8 grid gap-4 lg:grid-cols-3">
-              {serviceCards.map((service) => {
+              {serviceCards.map((service, index) => {
                 const Icon = service.icon;
                 return (
-                <article key={service.title} className="rounded-2xl border border-slate-200 bg-slate-50/80 p-5 transition duration-300 hover:-translate-y-0.5 hover:bg-white">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700">
-                    <Icon size={18} />
-                  </span>
-                  <h3 className="text-lg font-semibold">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">{service.description}</p>
-                  <ul className="mt-4 space-y-2 text-sm text-slate-700">
-                    {service.points.map((point) => (
-                      <li key={point}>• {point}</li>
-                    ))}
-                  </ul>
-                </article>
+                  <article
+                    key={service.title}
+                    className={`rounded-2xl border border-slate-200 bg-slate-50/80 p-5 transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-md ${index === 1 ? "animate-fade-up animate-delay-1" : index === 2 ? "animate-fade-up animate-delay-2" : "animate-fade-up"}`}
+                  >
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700">
+                      <Icon size={18} />
+                    </span>
+                    <h3 className="mt-3 text-lg font-semibold">{service.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-slate-600">{service.description}</p>
+                    <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                      {service.points.map((point) => (
+                        <li key={point}>• {point}</li>
+                      ))}
+                    </ul>
+                  </article>
                 );
               })}
             </div>
           </div>
         </section>
 
-        <section id="why-us" className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <section id="why-us" className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold sm:text-4xl">Why Choose TechInRent?</h2>
+            <h2 className="text-3xl font-bold sm:text-4xl">Why Choose TechInRent?</h2>
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {whyUsCards.map((item) => {
+            {whyUsCards.map((item, index) => {
               const Icon = item.icon;
               return (
-              <article key={item.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-0.5">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700">
-                  <Icon size={18} />
-                </span>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
-              </article>
+                <article
+                  key={item.title}
+                  className={`rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md ${index % 2 === 0 ? "animate-fade-up animate-delay-1" : "animate-fade-up animate-delay-2"}`}
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700">
+                    <Icon size={18} />
+                  </span>
+                  <h3 className="mt-3 text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
+                </article>
               );
             })}
           </div>
         </section>
 
-        <section id="contact" className="mx-auto w-full max-w-7xl px-4 pb-8 pt-12 sm:px-6 sm:pb-12 sm:pt-14 lg:px-8">
-          <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <section id="contact" className="mx-auto w-full max-w-7xl px-4 pb-10 pt-14 sm:px-6 sm:pb-14 sm:pt-16 lg:px-8">
+          <div className="animate-fade-up rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-300/30 sm:p-8">
             <div className="text-center">
-              <h2 className="text-3xl font-semibold sm:text-4xl">Contact Us</h2>
+              <h2 className="text-3xl font-bold sm:text-4xl">Contact Us</h2>
               <p className="mx-auto mt-3 max-w-2xl text-slate-600">
                 Ready to grow your LinkedIn presence? Reach out and get started today.
               </p>

@@ -14,13 +14,13 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 shadow-sm shadow-slate-900/5 backdrop-blur-md">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="#top" className="group inline-flex items-center gap-3" aria-label="Go to top">
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-700 to-emerald-700 text-sm font-bold text-white shadow-sm">
             TR
           </span>
-          <span className="text-sm font-medium tracking-wide text-slate-900 sm:text-base">
+          <span className="text-sm font-semibold tracking-wide text-slate-900 sm:text-base">
             TechInRent
           </span>
         </Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
           ))}
           <a
             href="#contact"
-            className="rounded-xl bg-slate-800 px-5 py-2.5 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-slate-700"
+            className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-slate-800"
           >
             Get Started
           </a>
