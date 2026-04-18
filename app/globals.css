@@ -63,11 +63,14 @@ body {
 .cur.big { width: 18px; height: 18px; }
 .cur-ring.big { width: 50px; height: 50px; }
 
-/* ── TICKER ── */
-.ticker-track {
-  display: flex;
-  animation: ticker 28s linear infinite;
-  width: max-content;
+
+/* ── CAROUSEL ── */
+@keyframes carouselSlide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(var(--slide-amount)); }
+}
+.carousel-track {
+  animation: carouselSlide 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* ── REVEAL ── */
@@ -96,6 +99,7 @@ body {
   z-index: 0;
 }
 
+
 /* ── ANIMATIONS ── */
 @keyframes fadeDown {
   from { opacity: 0; transform: translateY(-16px); }
@@ -117,10 +121,6 @@ body {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
 
 .animate-fade-down { animation: fadeDown 0.65s ease both; }
 .animate-delay-1   { animation-delay: 80ms; }
@@ -137,6 +137,12 @@ body {
 .animate-line-grow {
   animation: lineGrow 0.8s 0.6s ease both;
   transform-origin: left;
+}
+
+.service-cta-link:hover {
+  background: var(--ink2) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 36px rgba(13, 31, 30, 0.28) !important;
 }
 
 /* ── RESPONSIVE ── */

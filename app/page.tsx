@@ -1,60 +1,67 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
+import Link from "next/link";
 import WhatsAppFloat from "@/components/shared/WhatsAppFloat";
 import {
   HiArrowRight,
-  HiArrowTrendingUp,
   HiCalendarDays,
   HiChatBubbleLeftRight,
   HiCheckBadge,
   HiClipboardDocument,
   HiEnvelope,
-  HiShieldCheck,
   HiSparkles,
-  HiUsers,
 } from "react-icons/hi2";
 import { FaWhatsapp } from "react-icons/fa";
+import {
+  FaArrowTrendUp,
+  FaArrowRightLong,
+  FaHandshake,
+  FaRocket,
+} from "react-icons/fa6";
 import { RiInstagramLine, RiTelegramLine, RiTwitterXLine } from "react-icons/ri";
 
 const serviceCards = [
   {
-    icon: <HiUsers size={22} color="var(--teal)" />,
-    tag: "Outreach",
+    icon: <FaHandshake size={22} color="var(--teal)" aria-hidden />,
     title: "LinkedIn Outreach & Management",
     description:
-      "Done-for-you prospecting systems built to book qualified calls with the right audience.",
+      "Managed outreach systems focused on qualified conversations and pipeline growth.",
     bullets: [
-      "ICP targeting and list building",
-      "Message sequencing and follow-ups",
-      "Weekly reporting and optimization",
+      "Done-for-you campaign setup",
+      "ICP-targeted outreach strategy",
+      "Weekly performance tracking",
     ],
+    ctaLabel: "Book Demo",
+    ctaHref: "/demo",
   },
   {
-    icon: <HiArrowTrendingUp size={22} color="var(--teal)" />,
-    tag: "Growth",
-    title: "Follower Growth",
+    icon: <FaRocket size={22} color="var(--teal)" aria-hidden />,
+    title: "LinkedIn Growth",
     description:
-      "Build profile authority with safe growth workflows that increase visibility and trust over time.",
+      "Scale visibility and follower growth with a safe, consistent growth framework.",
     bullets: [
-      "Audience growth roadmap",
-      "Profile positioning suggestions",
-      "Consistent visibility strategy",
+      "Profile authority positioning",
+      "Steady follower growth",
+      "Designed for long-term brand trust",
     ],
+    ctaLabel: "Buy Now",
+    ctaHref: "/followers-checkout",
   },
   {
-    icon: <HiShieldCheck size={22} color="var(--teal)" />,
-    tag: "Recovery",
+    icon: <FaArrowTrendUp size={22} color="var(--teal)" aria-hidden />,
     title: "Account Recovery Support",
     description:
-      "Clear, structured guidance for restricted accounts so you can restore health without more risk.",
+      "Structured support to restore account health and reduce restriction risks.",
     bullets: [
-      "Account review and diagnosis",
-      "Recovery action plan",
-      "Safe operating best practices",
+      "Restriction diagnosis support",
+      "Recovery action roadmap",
+      "Preventive policy-safe best practices",
     ],
+    ctaLabel: "Schedule Call",
+    ctaHref: "/demo",
   },
 ];
 
@@ -90,6 +97,92 @@ const whyUsCards = [
     text: "You are not left with a tool alone. We help translate execution into pipeline and client growth.",
   },
 ];
+
+const ALL_TAGS = [
+  "LinkedIn Outreach",
+  "Follower Growth",
+  "Account Recovery",
+  "Lead Qualification",
+  "Growth Strategy",
+  "Policy-Safe Execution",
+];
+
+function CarouselBanner() {
+  const [offset, setOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [boxWidth, setBoxWidth] = useState(0);
+
+  useEffect(() => {
+    const calc = () => {
+      if (containerRef.current) {
+        const total = containerRef.current.offsetWidth;
+        // 4 boxes + 3 gaps of 14px
+        setBoxWidth((total - 3 * 14) / 4);
+      }
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setOffset((prev) => (prev + 1) % ALL_TAGS.length);
+    }, 2500);
+    return () => clearInterval(id);
+  }, []);
+
+  const slots = Array.from({ length: 5 }, (_, i) =>
+    ALL_TAGS[(offset + i) % ALL_TAGS.length]
+  );
+
+  return (
+    <div
+      ref={containerRef}
+      style={{ maxWidth: "1200px", margin: "0 auto", overflow: "hidden" }}
+    >
+      <div
+        key={offset}
+        className="carousel-track"
+        style={{
+          display: "flex",
+          gap: "14px",
+          width: boxWidth ? `${5 * boxWidth + 4 * 14}px` : "auto",
+          ["--slide-amount" as string]: boxWidth ? `-${boxWidth + 14}px` : "-25%",
+        }}
+      >
+        {slots.map((tag, i) => (
+          <span
+            key={`${tag}-${i}`}
+            style={{
+              flexShrink: 0,
+              width: boxWidth ? `${boxWidth}px` : "calc(25% - 10.5px)",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              padding: "28px 20px",
+              borderRadius: "16px",
+              background: "var(--teal-deep)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "0 8px 24px rgba(6,61,55,0.18)",
+              color: "rgba(255,255,255,0.9)",
+              fontFamily: "var(--font-heading, sans-serif)",
+              fontSize: "13px",
+              fontWeight: 700,
+              textTransform: "uppercase" as const,
+              letterSpacing: "0.1em",
+              whiteSpace: "nowrap" as const,
+            }}
+          >
+            <span style={{ color: "var(--teal-light)", fontSize: "11px" }}>◆</span>
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const curRef = useRef<HTMLDivElement>(null);
@@ -427,98 +520,92 @@ export default function Home() {
           </div>
         </section>
 
-        <div style={{ background: "var(--teal-deep)", padding: "14px 0", overflow: "hidden" }}>
-          <div className="ticker-track">
-            {[
-              "LinkedIn Outreach",
-              "Follower Growth",
-              "Account Recovery",
-              "Lead Qualification",
-              "Growth Strategy",
-              "Policy-Safe Execution",
-              "LinkedIn Outreach",
-              "Follower Growth",
-              "Account Recovery",
-              "Lead Qualification",
-              "Growth Strategy",
-              "Policy-Safe Execution",
-            ].map((item, index) => (
-              <span
-                key={`${item}-${index}`}
+        <div style={{ background: "var(--off)", padding: "28px 5%" }}>
+          <CarouselBanner />
+        </div>
+
+        <section
+          id="goals"
+          className="reveal"
+          style={{
+            scrollMarginTop: "88px",
+            padding: "96px 5% 104px",
+            background: "linear-gradient(180deg, var(--off) 0%, #eef6f5 50%, var(--off) 100%)",
+            borderTop: "1px solid var(--line)",
+            borderBottom: "1px solid var(--line)",
+          }}
+        >
+          <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+            <div style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 48px" }}>
+              <div
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "18px",
-                  padding: "0 28px",
-                  color: "rgba(255,255,255,0.7)",
-                  whiteSpace: "nowrap",
-                  fontFamily: "var(--font-heading, sans-serif)",
-                  fontSize: "12px",
+                  gap: "8px",
+                  padding: "8px 18px",
+                  borderRadius: "999px",
+                  border: "1px solid var(--teal-border)",
+                  background: "var(--white)",
+                  boxShadow: "0 4px 14px rgba(14,122,110,0.08)",
+                  fontFamily: "var(--font-body, sans-serif)",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  letterSpacing: "0.12em",
+                  color: "var(--teal-dark)",
                 }}
               >
-                {item}
-                <span style={{ color: "var(--teal-light)" }}>◆</span>
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <section id="goals" className="reveal" style={{ padding: "96px 5%", background: "var(--off)" }}>
-          <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-            <div className="goals-top-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "end" }}>
-              <div>
-                <p
-                  style={{
-                    margin: 0,
-                    color: "var(--teal)",
-                    fontFamily: "var(--font-body, sans-serif)",
-                    fontWeight: 700,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    fontSize: "12px",
-                  }}
-                >
-                  Services
-                </p>
-                <h2
-                  style={{
-                    margin: "12px 0 0",
-                    fontFamily: "var(--font-heading, sans-serif)",
-                    fontSize: "clamp(32px, 4vw, 52px)",
-                    lineHeight: 1.08,
-                    color: "var(--ink)",
-                  }}
-                >
-                  Pick the growth path that matches your current priority.
-                </h2>
+                <HiSparkles size={15} color="var(--teal)" aria-hidden />
+                Premium Services
               </div>
+              <h2
+                style={{
+                  margin: "22px 0 0",
+                  fontFamily: "var(--font-heading, sans-serif)",
+                  fontSize: "clamp(30px, 4vw, 44px)",
+                  fontWeight: 800,
+                  lineHeight: 1.12,
+                  letterSpacing: "-0.03em",
+                  color: "var(--ink)",
+                }}
+              >
+                LinkedIn Growth Services
+              </h2>
               <p
                 style={{
-                  margin: 0,
+                  margin: "16px 0 0",
                   fontFamily: "var(--font-body, sans-serif)",
+                  fontSize: "17px",
+                  lineHeight: 1.65,
                   color: "var(--muted)",
-                  lineHeight: 1.8,
-                  fontSize: "16px",
                 }}
               >
-                Whether you need meetings, audience growth, or recovery help, the goal is the
-                same: a cleaner system that produces real outcomes and protects your brand.
+                Empower your professional growth with tailored services designed for measurable outcomes.
               </p>
             </div>
 
-            <div className="goal-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px", marginTop: "38px" }}>
+            <div
+              className="goal-grid-3"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "24px",
+                alignItems: "stretch",
+              }}
+            >
               {serviceCards.map((service) => (
                 <article
                   key={service.title}
                   data-cursor="highlight"
                   style={{
-                    padding: "30px",
-                    borderRadius: "20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    minHeight: "100%",
+                    padding: "28px 26px 26px",
+                    borderRadius: "22px",
                     background: "var(--white)",
                     border: "1px solid var(--line)",
-                    boxShadow: "0 14px 34px rgba(13,31,30,0.04)",
+                    boxShadow: "0 18px 48px rgba(13,31,30,0.08)",
                   }}
                 >
                   <div
@@ -526,33 +613,24 @@ export default function Home() {
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "14px",
-                      background: "var(--teal-pale)",
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "16px",
+                      background: "linear-gradient(145deg, var(--teal-pale), var(--teal-pale2))",
+                      border: "1px solid var(--teal-border)",
                     }}
                   >
                     {service.icon}
                   </div>
-                  <p
-                    style={{
-                      margin: "18px 0 0",
-                      fontFamily: "var(--font-body, sans-serif)",
-                      fontSize: "12px",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      color: "var(--muted2)",
-                      fontWeight: 700,
-                    }}
-                  >
-                    {service.tag}
-                  </p>
                   <h3
                     style={{
-                      margin: "8px 0 0",
+                      margin: "20px 0 0",
                       fontFamily: "var(--font-heading, sans-serif)",
                       color: "var(--ink)",
-                      fontSize: "24px",
+                      fontSize: "21px",
+                      fontWeight: 800,
+                      lineHeight: 1.25,
+                      letterSpacing: "-0.02em",
                     }}
                   >
                     {service.title}
@@ -562,21 +640,67 @@ export default function Home() {
                       margin: "12px 0 0",
                       fontFamily: "var(--font-body, sans-serif)",
                       color: "var(--muted)",
-                      lineHeight: 1.75,
+                      lineHeight: 1.7,
+                      fontSize: "15px",
                     }}
                   >
                     {service.description}
                   </p>
-                  <ul style={{ margin: "20px 0 0", padding: 0, listStyle: "none", display: "grid", gap: "10px" }}>
+                  <ul
+                    style={{
+                      margin: "20px 0 0",
+                      padding: 0,
+                      listStyle: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "12px",
+                      flex: 1,
+                    }}
+                  >
                     {service.bullets.map((bullet) => (
                       <li key={bullet} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                        <HiCheckBadge size={18} color="var(--teal)" style={{ marginTop: "2px", flexShrink: 0 }} />
-                        <span style={{ fontFamily: "var(--font-body, sans-serif)", color: "var(--body)", lineHeight: 1.7 }}>
+                        <HiCheckBadge size={18} color="var(--teal)" style={{ marginTop: "3px", flexShrink: 0 }} aria-hidden />
+                        <span
+                          style={{
+                            fontFamily: "var(--font-body, sans-serif)",
+                            color: "var(--body)",
+                            lineHeight: 1.55,
+                            fontSize: "14px",
+                          }}
+                        >
                           {bullet}
                         </span>
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    href={service.ctaHref}
+                    className="service-cta-link"
+                    data-cursor="highlight"
+                    style={{
+                      marginTop: "28px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "10px",
+                      width: "100%",
+                      padding: "14px 20px",
+                      borderRadius: "12px",
+                      background: "var(--ink)",
+                      color: "#fff",
+                      fontFamily: "var(--font-heading, sans-serif)",
+                      fontSize: "12px",
+                      fontWeight: 800,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      textDecoration: "none",
+                      boxShadow: "0 10px 28px rgba(13,31,30,0.2)",
+                      transition: "transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease",
+                    }}
+                  >
+                    {service.ctaLabel}
+                    <FaArrowRightLong size={14} aria-hidden />
+                  </Link>
                 </article>
               ))}
             </div>
