@@ -1,31 +1,60 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer style={{ background: "var(--ink)", padding: "64px 5% 32px" }}>
       <div
-        className="grid gap-[60px] pb-12"
         style={{
+          display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr",
+          gap: "60px",
+          paddingBottom: "48px",
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
+        className="footer-grid-cols"
       >
         {/* Brand */}
         <div>
           <div
-            className="w-[38px] h-[38px] rounded-[10px] flex items-center justify-center text-white text-[14px] font-extrabold mb-[14px]"
             style={{
-              fontFamily: "var(--font-syne), Syne, sans-serif",
+              width: "38px",
+              height: "38px",
+              borderRadius: "10px",
               background: "linear-gradient(135deg, var(--teal), var(--teal-dark))",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "var(--font-syne, sans-serif)",
+              fontWeight: 800,
+              color: "#fff",
+              fontSize: "14px",
+              marginBottom: "14px",
             }}
           >
             TR
           </div>
           <span
-            className="block text-[17px] font-bold text-white mb-[14px]"
-            style={{ fontFamily: "var(--font-syne), Syne, sans-serif" }}
+            style={{
+              fontFamily: "var(--font-syne, sans-serif)",
+              fontWeight: 700,
+              fontSize: "17px",
+              color: "#fff",
+              display: "block",
+              marginBottom: "14px",
+            }}
           >
             TechInRent
           </span>
-          <p className="text-[13.5px] leading-[1.8] font-light max-w-[280px]" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-outfit, sans-serif)",
+              fontSize: "13.5px",
+              color: "rgba(255,255,255,0.4)",
+              lineHeight: 1.8,
+              maxWidth: "280px",
+              fontWeight: 300,
+            }}
+          >
             We help professionals and teams accelerate LinkedIn growth through secure outreach systems, transparent reporting, and measurable outcomes.
           </p>
         </div>
@@ -33,35 +62,53 @@ export default function Footer() {
         {/* Navigation */}
         <div>
           <h4
-            className="text-[10px] font-bold uppercase tracking-[0.14em] mb-5"
-            style={{ color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-syne), Syne, sans-serif" }}
+            style={{
+              fontFamily: "var(--font-syne, sans-serif)",
+              fontWeight: 700,
+              fontSize: "10px",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.25)",
+              marginBottom: "20px",
+            }}
           >
             Navigation
           </h4>
           {[
-            { label: "Services", href: "#goals" },
-            { label: "How It Works", href: "#how" },
-            { label: "Why Us", href: "#why" },
-            { label: "Contact", href: "#contact" },
+            { label: "Services", href: "/#goals" },
+            { label: "How It Works", href: "/#how" },
+            { label: "Why Us", href: "/#why" },
+            { label: "Contact", href: "/#contact" },
           ].map((l) => (
-            <a
-              key={l.href}
+            <Link
+              key={l.label}
               href={l.href}
-              className="block text-[14px] mb-3 no-underline transition-colors duration-200"
-              style={{ color: "rgba(255,255,255,0.5)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--teal-light)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+              style={{
+                display: "block",
+                color: "rgba(255,255,255,0.5)",
+                textDecoration: "none",
+                fontFamily: "var(--font-outfit, sans-serif)",
+                fontSize: "14px",
+                marginBottom: "12px",
+              }}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         {/* Contact */}
         <div>
           <h4
-            className="text-[10px] font-bold uppercase tracking-[0.14em] mb-5"
-            style={{ color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-syne), Syne, sans-serif" }}
+            style={{
+              fontFamily: "var(--font-syne, sans-serif)",
+              fontWeight: 700,
+              fontSize: "10px",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.25)",
+              marginBottom: "20px",
+            }}
           >
             Contact
           </h4>
@@ -72,14 +119,18 @@ export default function Footer() {
             { label: "Twitter / X", href: "https://twitter.com/techinrent" },
           ].map((l) => (
             <a
-              key={l.href}
+              key={l.label}
               href={l.href}
-              target={l.href.startsWith("mailto") ? undefined : "_blank"}
-              rel={l.href.startsWith("mailto") ? undefined : "noreferrer"}
-              className="block text-[14px] mb-3 no-underline transition-colors duration-200"
-              style={{ color: "rgba(255,255,255,0.5)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--teal-light)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+              target={l.href.startsWith("http") ? "_blank" : undefined}
+              rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              style={{
+                display: "block",
+                color: "rgba(255,255,255,0.5)",
+                textDecoration: "none",
+                fontFamily: "var(--font-outfit, sans-serif)",
+                fontSize: "14px",
+                marginBottom: "12px",
+              }}
             >
               {l.label}
             </a>
@@ -87,15 +138,42 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="pt-7 flex justify-between items-center flex-wrap gap-3">
-        <span className="text-[12.5px]" style={{ color: "rgba(255,255,255,0.25)" }}>
-          © 2026 TechInRent. All rights reserved.
+      <div
+        style={{
+          paddingTop: "28px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "8px",
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "var(--font-outfit, sans-serif)",
+            fontSize: "12.5px",
+            color: "rgba(255,255,255,0.25)",
+          }}
+        >
+          © 2025 TechInRent. All rights reserved.
         </span>
-        <span className="text-[12.5px]" style={{ color: "rgba(255,255,255,0.25)" }}>
+        <span
+          style={{
+            fontFamily: "var(--font-outfit, sans-serif)",
+            fontSize: "12.5px",
+            color: "rgba(255,255,255,0.25)",
+          }}
+        >
           LinkedIn Growth — Done Right{" "}
           <span style={{ color: "var(--teal-light)" }}>◆</span>
         </span>
       </div>
+
+      <style>{`
+        @media (max-width: 1100px) {
+          .footer-grid-cols { grid-template-columns: 1fr !important; gap: 32px !important; }
+        }
+      `}</style>
     </footer>
   );
 }
