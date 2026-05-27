@@ -34,8 +34,10 @@ export async function connectDB(): Promise<typeof mongoose> {
     // Add DNS resolution options to help with SRV lookups
     cached.promise = mongoose.connect(process.env.MONGO_URI, {
       bufferCommands: false,
-      family: 4, // Force IPv4
-      serverSelectionTimeoutMS: 10000,
+      family: 4,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 10000,
+      socketTimeoutMS: 30000,
     });
   }
 
